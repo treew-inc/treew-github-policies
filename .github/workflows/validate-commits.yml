@@ -6,7 +6,7 @@ on:
 jobs:
   commitlint:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -18,25 +18,29 @@ jobs:
 
       - name: Instalar dependencias
         run: |
-          npm install --save-dev @commitlint/{cli,config-conventional} franc
+          npm install --save-dev @commitlint/{cli,config-conventional}
+          npm install franc
 
-      - name: Verificar commits
+      - name: Bloquear si hay commits inválidos o en otro idioma
         run: |
           git fetch --depth=2 origin ${{ github.event.pull_request.base.ref }}
           chmod +x ./node_modules/.bin/commitlint
           commits=$(git log --format="%H" origin/${{ github.event.pull_request.base.ref }}..HEAD)
-
           for commit in $commits; do
             echo "🔍 Verificando commit: $commit"
-            mensaje=$(git show -s --format=%B $commit)
 
+            # Validar con commitlint
             echo "⧗ Validando formato con commitlint..."
-            echo "$mensaje" | ./node_modules/.bin/commitlint
+            git show -s --format=%B $commit | ./node_modules/.bin/commitlint
 
+            # Validar idioma
             echo "🌐 Verificando idioma del mensaje..."
-            lang=$(echo "$mensaje" | npx --yes franc)
+            mensaje=$(git show -s --format=%B $commit)
+            lang=$(echo "$mensaje" | npx franc)
+
+            echo "🗣 Detected language: $lang"
             if [ "$lang" != "eng" ]; then
-              echo "⛔ El mensaje del commit no parece estar en inglés: \"$mensaje\""
+              echo "❌ Commit en idioma no permitido (detectado: $lang). Debe estar en inglés técnico."
               exit 1
             fi
           done
