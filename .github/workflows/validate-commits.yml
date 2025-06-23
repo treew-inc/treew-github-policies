@@ -6,7 +6,7 @@ on:
 jobs:
   commitlint:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -18,8 +18,7 @@ jobs:
 
       - name: Instalar dependencias
         run: |
-          npm install --save-dev @commitlint/{cli,config-conventional}
-          npm install franc
+          npm install --save-dev @commitlint/{cli,config-conventional} franc-cli
 
       - name: Validar mensajes de commits
         run: |
@@ -29,12 +28,12 @@ jobs:
           for commit in $commits; do
             echo "🔍 Verificando commit: $commit"
             mensaje=$(git show -s --format=%B $commit)
-            
+
             echo "⧗ Validando formato con commitlint..."
             echo "$mensaje" | ./node_modules/.bin/commitlint
-            
+
             echo "🌐 Verificando idioma del mensaje..."
-            idioma=$(echo "$mensaje" | npx --yes franc)
+            idioma=$(echo "$mensaje" | npx --yes franc-cli)
             if [ "$idioma" != "eng" ]; then
               echo "❌ El mensaje del commit no está en inglés (detectado: $idioma)"
               exit 1
