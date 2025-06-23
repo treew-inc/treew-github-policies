@@ -1,0 +1,31 @@
+name: Validar mensajes de commits
+
+on:
+  workflow_call:
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: |
+          npm install --save-dev @commitlint/{cli,config-conventional}
+
+      - name: Bloquear si hay commits inválidos
+        run: |
+          git fetch --depth=2 origin ${{ github.event.pull_request.base.ref }}
+          chmod +x ./node_modules/.bin/commitlint
+          commits=$(git log --format="%H" origin/${{ github.event.pull_request.base.ref }}..HEAD)
+          for commit in $commits; do
+            echo "⛔ Verificando commit: $commit"
+            git show -s --format=%B $commit | ./node_modules/.bin/commitlint
+          done
