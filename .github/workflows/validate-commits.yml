@@ -21,26 +21,23 @@ jobs:
           npm install --save-dev @commitlint/{cli,config-conventional}
           npm install franc
 
-      - name: Bloquear si hay commits inválidos o en otro idioma
+      - name: Verificar mensajes de commits
         run: |
           git fetch --depth=2 origin ${{ github.event.pull_request.base.ref }}
           chmod +x ./node_modules/.bin/commitlint
           commits=$(git log --format="%H" origin/${{ github.event.pull_request.base.ref }}..HEAD)
           for commit in $commits; do
             echo "🔍 Verificando commit: $commit"
-
-            # Validar con commitlint
-            echo "⧗ Validando formato con commitlint..."
-            git show -s --format=%B $commit | ./node_modules/.bin/commitlint
-
-            # Validar idioma
-            echo "🌐 Verificando idioma del mensaje..."
             mensaje=$(git show -s --format=%B $commit)
-            lang=$(echo "$mensaje" | npx franc)
 
-            echo "🗣 Detected language: $lang"
-            if [ "$lang" != "eng" ]; then
-              echo "❌ Commit en idioma no permitido (detectado: $lang). Debe estar en inglés técnico."
+            echo "⧗ Validando formato con commitlint..."
+            echo "$mensaje" | ./node_modules/.bin/commitlint
+
+            echo "🌐 Verificando idioma del mensaje..."
+            idioma=$(echo "$mensaje" | npx franc)
+            echo "Idioma detectado: $idioma"
+            if [[ "$idioma" != "eng" ]]; then
+              echo "⛔ Commit en idioma no permitido: $idioma"
               exit 1
             fi
           done
