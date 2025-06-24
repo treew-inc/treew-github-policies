@@ -33,8 +33,8 @@ jobs:
           for commit in $commits; do
             echo "⧗ Validando commit: $commit"
             mensaje=$(git show -s --format=%B $commit)
-            echo "$mensaje" | npx --yes commitlint --color always || exit 1
+            echo "$mensaje" | npx --yes commitlint || exit 1
           done
 
       - name: Validación finalizada
-        run: echo "✅ Todos los commits cumplen con
+        run: echo "✅ Todos los commits cumplen con la convención definida."
