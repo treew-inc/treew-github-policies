@@ -1,6 +1,11 @@
 name: Validar mensajes de commits
 
 on:
+  pull_request:
+      types: [opened, synchronize, reopened, edited]
+      # Si solo quieres que cuente para ciertas ramas de destino:
+      # branches: [main]
+      
   workflow_call:
 
 jobs:
