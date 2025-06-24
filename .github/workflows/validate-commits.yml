@@ -2,10 +2,9 @@ name: Validar mensajes de commits
 
 on:
   pull_request:
-      types: [opened, synchronize, reopened, edited]
-      # Si solo quieres que cuente para ciertas ramas de destino:
-      # branches: [main]
-      
+    types: [opened, synchronize, reopened, edited]
+    # branches: [main]  # Descomenta si deseas limitar a ramas específicas
+
   workflow_call:
 
 jobs:
@@ -27,12 +26,13 @@ jobs:
 
       - name: Crear archivo de configuración temporal
         run: |
-          echo "module.exports = {
-            extends: ['@commitlint/config-conventional'],
-            rules: {
-              'header-max-length': [2, 'always', 250]
-            }
-          };" > commitlint.config.js
+          echo "module.exports = {" > commitlint.config.js
+          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.js
+          echo "  rules: {" >> commitlint.config.js
+          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.js
+          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.js
+          echo "  }" >> commitlint.config.js
+          echo "};" >> commitlint.config.js
 
       - name: Validar commits del Pull Request
         run: |
