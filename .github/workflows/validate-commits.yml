@@ -29,7 +29,7 @@ jobs:
           echo "module.exports = {" > commitlint.config.js
           echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.js
           echo "  rules: {" >> commitlint.config.js
-          echo "    'header-max-length': [2, 'always', 250]," >> commitlint.config.js
+          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.js
           echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.js
           echo "  }" >> commitlint.config.js
           echo "};" >> commitlint.config.js
