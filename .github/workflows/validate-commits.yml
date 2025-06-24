@@ -27,7 +27,12 @@ jobs:
       - name: Validar commits del Pull Request
         run: |
           set -e
-          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=20
+
+          # Traer explícitamente los SHAs involucrados en el PR
+          git fetch origin ${{ github.event.pull_request.base.sha }}
+          git fetch origin ${{ github.event.pull_request.head.sha }}
+
+          # Obtener los commits entre base y head
           commits=$(git rev-list ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
 
           errores=0
