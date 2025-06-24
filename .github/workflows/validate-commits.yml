@@ -26,9 +26,15 @@ jobs:
 
       - name: Validar commits
         run: |
-          git fetch --depth=2 origin ${{ github.event.pull_request.base.ref }}
-          commits=$(git log --format="%H" origin/${{ github.event.pull_request.base.ref }}..HEAD)
+          set -e
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=10
+          commits=$(git rev-list origin/${{ github.event.pull_request.base.ref }}..HEAD)
+
           for commit in $commits; do
             echo "⧗ Validando commit: $commit"
-            git show -s --format=%B $commit | npx --yes commitlint
+            mensaje=$(git show -s --format=%B $commit)
+            echo "$mensaje" | npx --yes commitlint --color always || exit 1
           done
+
+      - name: Validación finalizada
+        run: echo "✅ Todos los commits cumplen con
