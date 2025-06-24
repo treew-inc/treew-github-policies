@@ -30,11 +30,24 @@ jobs:
           git fetch origin ${{ github.event.pull_request.base.ref }} --depth=10
           commits=$(git rev-list origin/${{ github.event.pull_request.base.ref }}..HEAD)
 
+          errores=0
           for commit in $commits; do
             echo "⧗ Validando commit: $commit"
             mensaje=$(git show -s --format=%B $commit)
-            echo "$mensaje" | npx --yes commitlint || exit 1
+            echo "📝 Mensaje del commit: \"$mensaje\""
+
+            echo "$mensaje" | npx --yes commitlint
+            if [ $? -ne 0 ]; then
+              echo "❌ Commit inválido detectado: $commit"
+              errores=1
+            else
+              echo "✅ Commit válido"
+            fi
           done
 
-      - name: Validación finalizada
-        run: echo "✅ Todos los commits cumplen con la convención definida."
+          if [ $errores -ne 0 ]; then
+            echo "🚨 Se encontraron commits no válidos. Fallando el workflow."
+            exit 1
+          else
+            echo "🎉 Todos los commits cumplen con la convención."
+          fi
