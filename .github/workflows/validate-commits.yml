@@ -6,7 +6,7 @@ on:
 jobs:
   commitlint:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -16,16 +16,19 @@ jobs:
         with:
           node-version: 18
 
-      - name: Instalar dependencias
+      - name: Instalar dependencias de commitlint
         run: |
           npm install --save-dev @commitlint/{cli,config-conventional}
 
-      - name: Verificar commits
+      - name: Crear archivo de configuración temporal
+        run: |
+          echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+
+      - name: Validar commits
         run: |
           git fetch --depth=2 origin ${{ github.event.pull_request.base.ref }}
-          chmod +x ./node_modules/.bin/commitlint
           commits=$(git log --format="%H" origin/${{ github.event.pull_request.base.ref }}..HEAD)
           for commit in $commits; do
-            echo "⛔ Verificando commit: $commit"
-            git show -s --format=%B $commit | ./node_modules/.bin/commitlint
+            echo "⧗ Validando commit: $commit"
+            git show -s --format=%B $commit | npx --yes commitlint
           done
