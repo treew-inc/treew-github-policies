@@ -28,7 +28,7 @@ on:
 
 jobs:
   validar:
-    uses: treew-inc/treew-repo-workflows/.github/workflows/validate-commits.yml@main
+    uses: treew-inc/treew-github-policies/.github/workflows/validate-commits.yml@main
 ```
 
 ## Ventajas del enfoque centralizado
