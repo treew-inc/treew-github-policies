@@ -1,6 +1,10 @@
-name: 🔍 PR Compliance Check
+name: 🔍 Validar PR
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    # branches: [main]  # Descomenta si deseas limitar a ramas específicas
+
   workflow_call:
 
 jobs:
