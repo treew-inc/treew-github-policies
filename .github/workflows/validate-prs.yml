@@ -5,15 +5,13 @@ on:
     types: [opened, synchronize, reopened, edited]
     # branches: [main]  # Descomenta si deseas limitar a ramas específicas
 
-  workflow_call:
-
 jobs:
   validate-pr:
     name: Verificar cumplimiento del Pull Request
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📋 Validar título del PR (en inglés y con convención <type>: description)
+      - name: 📋 Validar título del PR
         uses: amannn/action-semantic-pull-request@v5
         with:
           types: |
