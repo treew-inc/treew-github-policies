@@ -1,4 +1,4 @@
-name: 🔍 Validar PR
+name: Validar PR
 
 on:
   pull_request:
@@ -36,10 +36,9 @@ jobs:
           script: |
             const body = context.payload.pull_request.body;
             const requiredSections = [
-              "## 📌 Descripción",
-              "## 🔍 Validación manual",
-              "## 🧩 Referencias",
-              "## ✅ Checklist"
+              "## Descripción",
+              "## Referencias",
+              "## Checklist"
             ];
             const missing = requiredSections.filter(section => !body.includes(section));
             if (missing.length > 0) {
