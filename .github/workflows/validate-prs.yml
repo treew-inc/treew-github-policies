@@ -3,7 +3,9 @@ name: Validar PR
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
-    # branches: [main]  # Descomenta si deseas limitar a ramas específicas
+
+permissions:
+  pull-requests: read
 
 jobs:
   validate-pr:
