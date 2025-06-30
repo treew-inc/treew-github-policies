@@ -7,6 +7,11 @@ on:
 
   workflow_call:
 
+# 👇 Restringe los alcances del GITHUB_TOKEN a solo lectura
+permissions:
+  contents: read         # Permite checkout y git fetch
+  pull-requests: read    # Permite acceder a datos del evento del PR
+
 jobs:
   commitlint:
     runs-on: ubuntu-latest
