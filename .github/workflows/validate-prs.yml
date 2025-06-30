@@ -5,7 +5,8 @@ on:
     types: [opened, synchronize, reopened, edited]
 
 permissions:
-  pull-requests: read
+  contents: read          # Necesario para checkout si se agrega en el futuro
+  pull-requests: read     # Permite acceder a título y cuerpo del PR
 
 jobs:
   validate-pr:
