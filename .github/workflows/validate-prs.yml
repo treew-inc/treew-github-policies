@@ -31,24 +31,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🐞 Mostrar cuerpo del PR (debug)
+      - name: 📄 Verificar contenido obligatorio del cuerpo del PR (desde API)
         uses: actions/github-script@v7
         with:
           script: |
-            console.log("=== CUERPO DEL PR ===");
-            console.log(context.payload.pull_request?.body || '⚠️ No hay cuerpo de PR disponible');
+            const prNumber = context.issue.number;
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
 
-      - name: 📄 Verificar contenido obligatorio del cuerpo del PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const body = context.payload?.pull_request?.body;
-            if (!body) {
-              core.setFailed("❌ No se pudo acceder al cuerpo del PR.");
-              return;
-            }
-
+            const body = pr.body || '';
             const normalizedBody = body.toLowerCase().replace(/\r/g, '').trim();
+
             const requiredSections = [
               "## descripción",
               "## referencias",
