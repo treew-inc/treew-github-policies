@@ -35,17 +35,18 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const body = github.context.payload.pull_request?.body || '';
+            const body = context.payload.pull_request?.body || '';
+            const normalizedBody = body.toLowerCase().replace(/\r/g, '').trim();
+
             const requiredSections = [
-              { label: "## Descripción", regex: /^##\s*Descripción\b/m },
-              { label: "## Referencias", regex: /^##\s*Referencias\b/m },
-              { label: "## Checklist", regex: /^##\s*Checklist\b/m }
+              "## descripción",
+              "## referencias",
+              "## checklist"
             ];
-            const missing = requiredSections
-              .filter(section => !section.regex.test(body))
-              .map(section => section.label);
+
+            const missing = requiredSections.filter(section => !normalizedBody.includes(section));
             if (missing.length > 0) {
-              core.setFailed(`Faltan secciones requeridas en el cuerpo del PR: ${missing.join(', ')}`);
+              core.setFailed(`❌ Faltan secciones requeridas en el cuerpo del PR: ${missing.join(', ')}`);
             }
 
       - name: ✅ Validación exitosa
