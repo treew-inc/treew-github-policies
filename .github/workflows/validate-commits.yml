@@ -27,7 +27,7 @@ jobs:
 
       - name: Instalar dependencias de commitlint
         run: |
-          npm install --save-dev @commitlint/{cli,config-conventional}
+          npm install --save-dev @commitlint/cli @commitlint/config-conventional --legacy-peer-deps
 
       - name: Crear archivo de configuración temporal
         run: |
@@ -69,5 +69,5 @@ jobs:
             echo "🚨 Se encontraron commits no válidos. Fallando el workflow."
             exit 1
           else
-            echo "🎉 Todos los commits cumplen con la convención."
+            echo "Todos los commits cumplen con la convención."
           fi
