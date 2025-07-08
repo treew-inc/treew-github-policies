@@ -3,6 +3,7 @@ name: Validar mensajes de commits
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
+
   workflow_call:
 
 permissions:
@@ -24,23 +25,24 @@ jobs:
 
       - name: Instalar dependencias de commitlint
         run: |
-          npm install --save-dev @commitlint/{cli,config-conventional}
+          npm install --save-dev @commitlint/{cli,config-conventional} --legacy-peer-deps
 
       - name: Crear archivo de configuración temporal
         run: |
-          echo "module.exports = {" > commitlint.config.cjs
-          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.cjs
-          echo "  rules: {" >> commitlint.config.cjs
-          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.cjs
-          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.cjs
-          echo "  }" >> commitlint.config.cjs
-          echo "};" >> commitlint.config.cjs
+          echo "module.exports = {" > commitlint.config.js
+          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.js
+          echo "  rules: {" >> commitlint.config.js
+          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.js
+          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.js
+          echo "  }" >> commitlint.config.js
+          echo "};" >> commitlint.config.js
 
       - name: Validar commits del Pull Request
         run: |
           set -e
           git fetch origin ${{ github.event.pull_request.base.sha }}
           git fetch origin ${{ github.event.pull_request.head.sha }}
+
           commits=$(git rev-list ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
 
           errores=0
@@ -49,7 +51,7 @@ jobs:
             mensaje=$(git show -s --format=%B $commit)
             echo "📝 Mensaje del commit: \"$mensaje\""
 
-            echo "$mensaje" | npx --yes commitlint --config commitlint.config.cjs
+            echo "$mensaje" | npx --yes commitlint
             if [ $? -ne 0 ]; then
               echo "❌ Commit inválido detectado: $commit"
               errores=1
