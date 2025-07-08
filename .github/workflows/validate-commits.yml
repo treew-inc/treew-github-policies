@@ -3,14 +3,11 @@ name: Validar mensajes de commits
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
-    # branches: [main]  # Descomenta si deseas limitar a ramas específicas
-
   workflow_call:
 
-# 👇 Restringe los alcances del GITHUB_TOKEN a solo lectura
 permissions:
-  contents: read         # Permite checkout y git fetch
-  pull-requests: read    # Permite acceder a datos del evento del PR
+  contents: read
+  pull-requests: read
 
 jobs:
   commitlint:
@@ -27,27 +24,23 @@ jobs:
 
       - name: Instalar dependencias de commitlint
         run: |
-          npm install --save-dev @commitlint/cli @commitlint/config-conventional --legacy-peer-deps
+          npm install --save-dev @commitlint/{cli,config-conventional}
 
       - name: Crear archivo de configuración temporal
         run: |
-          echo "module.exports = {" > commitlint.config.js
-          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.js
-          echo "  rules: {" >> commitlint.config.js
-          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.js
-          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.js
-          echo "  }" >> commitlint.config.js
-          echo "};" >> commitlint.config.js
+          echo "module.exports = {" > commitlint.config.cjs
+          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.cjs
+          echo "  rules: {" >> commitlint.config.cjs
+          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.cjs
+          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.cjs
+          echo "  }" >> commitlint.config.cjs
+          echo "};" >> commitlint.config.cjs
 
       - name: Validar commits del Pull Request
         run: |
           set -e
-
-          # Traer explícitamente los SHAs involucrados en el PR
           git fetch origin ${{ github.event.pull_request.base.sha }}
           git fetch origin ${{ github.event.pull_request.head.sha }}
-
-          # Obtener los commits entre base y head
           commits=$(git rev-list ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
 
           errores=0
@@ -56,7 +49,7 @@ jobs:
             mensaje=$(git show -s --format=%B $commit)
             echo "📝 Mensaje del commit: \"$mensaje\""
 
-            echo "$mensaje" | npx --yes commitlint
+            echo "$mensaje" | npx --yes commitlint --config commitlint.config.cjs
             if [ $? -ne 0 ]; then
               echo "❌ Commit inválido detectado: $commit"
               errores=1
@@ -69,5 +62,5 @@ jobs:
             echo "🚨 Se encontraron commits no válidos. Fallando el workflow."
             exit 1
           else
-            echo "Todos los commits cumplen con la convención."
+            echo "🎉 Todos los commits cumplen con la convención."
           fi
