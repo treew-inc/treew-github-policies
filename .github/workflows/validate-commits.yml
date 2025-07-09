@@ -29,13 +29,13 @@ jobs:
 
       - name: Crear archivo de configuración temporal
         run: |
-          echo "module.exports = {" > commitlint.config.js
-          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.js
-          echo "  rules: {" >> commitlint.config.js
-          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.js
-          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.js
-          echo "  }" >> commitlint.config.js
-          echo "};" >> commitlint.config.js
+          echo "module.exports = {" > commitlint.config.cjs
+          echo "  extends: ['@commitlint/config-conventional']," >> commitlint.config.cjs
+          echo "  rules: {" >> commitlint.config.cjs
+          echo "    'header-max-length': [2, 'always', 150]," >> commitlint.config.cjs
+          echo "    'body-max-line-length': [2, 'always', 250]" >> commitlint.config.cjs
+          echo "  }" >> commitlint.config.cjs
+          echo "};" >> commitlint.config.cjs
 
       - name: Validar commits del Pull Request
         run: |
@@ -51,7 +51,7 @@ jobs:
             mensaje=$(git show -s --format=%B $commit)
             echo "📝 Mensaje del commit: \"$mensaje\""
 
-            echo "$mensaje" | npx --yes commitlint
+            echo "$mensaje" | npx --yes commitlint --config commitlint.config.cjs
             if [ $? -ne 0 ]; then
               echo "❌ Commit inválido detectado: $commit"
               errores=1
