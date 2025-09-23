@@ -21,8 +21,10 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/calidad-labels-testnuevo
-            treew-inc/core-api-treewsitesconfigurator
-          prune: false                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/callcenter-bot-telegram
+            treew-inc/callcenter-svc-valoraciones
+            treew-inc/callcenter-svc-zcli
+            treew-inc/callcenter-mcp-zendesk
+          prune: true                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
