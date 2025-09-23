@@ -1,0 +1,115 @@
+# === Tipo de trabajo (naturaleza del trabajo)
+- name: "Historia de usuario (HU)"
+  description: "Representa una necesidad funcional del usuario final."
+  color: "1f6feb"
+
+- name: "Tarea técnica"
+  description: "Tareas internas: refactor, configuración, scripts, etc."
+  color: "6f42c1"
+
+- name: "Bug"
+  description: "Incidencia o fallo en el sistema."
+  color: "d73a4a"
+
+- name: "Mejora"
+  description: "Ajuste o perfeccionamiento de una funcionalidad existente."
+  color: "a2eeef"
+
+# === Prioridad
+- name: "Alta prioridad"
+  description: "Requiere atención inmediata. Impacto crítico o compromiso clave."
+  color: "d93f0b"
+
+- name: "Media prioridad"
+  description: "Importante, pero no urgente."
+  color: "fbca04"
+
+- name: "Baja prioridad"
+  description: "Puede postergarse sin riesgo."
+  color: "cfd3d7"
+
+# === QA / calidad del proceso
+- name: "Primera pasada"
+  description: "Historia pasó QA sin ser devuelta."
+  color: "0e8a16"
+
+- name: "Con observaciones"
+  description: "Tarjeta fue devuelta a desarrollo por incumplimientos."
+  color: "fef2c0"
+
+- name: "Correcciones aplicadas"
+  description: "Ajustes solicitados por QA fueron resueltos."
+  color: "0fbf8f"
+
+- name: "Validación bloqueada"
+  description: "QA no puede validar la tarjeta (por ejemplo, falta entorno)."
+  color: "b60205"
+
+# === Seguimiento de Sprint / estado general
+- name: "Fuera de Sprint"
+  description: "Tarea que surge fuera del compromiso original del Sprint."
+  color: "9a6700"
+
+- name: "Cancelado"
+  description: "Tarea descartada sin ejecución."
+  color: "6a737d"
+
+# === Gestión de riesgos
+- name: "Riesgos identificados"
+  description: "Tarea en la cual se han identificado y documentado riesgos."
+  color: "8a2be2"
+
+# === Bloqueos y alertas operativas
+- name: "Bloqueado"
+  description: "La tarea no puede avanzar por un impedimento interno o externo."
+  color: "e11d21"
+
+- name: "Pendiente de tercero"
+  description: "Requiere insumo externo (cliente, proveedor, otro equipo)."
+  color: "5319e7"
+
+- name: "Urgente"
+  description: "Alta prioridad por impacto o fecha límite cercana."
+  color: "f14c4c"
+
+# === Estimación (Story Points, escala Fibonacci)
+- name: "Story:1"
+  description: "Tarea muy fácil, de bajo impacto y sin riesgos. Tiempo estimado: 1–2 horas."
+  color: "cfe3ff"
+
+- name: "Story:2"
+  description: "Tarea fácil, con cambios menores pero no triviales. Tiempo estimado: 2–4 horas."
+  color: "a4d1ff"
+
+- name: "Story:3"
+  description: "Tarea de complejidad media, aislada pero requiere análisis. Tiempo estimado: 4–8 horas (1 día)."
+  color: "78b9ff"
+
+- name: "Story:5"
+  description: "Tarea moderada, con lógica transversal o dependencia entre capas. Tiempo estimado: 1–2 días."
+  color: "4ea1ff"
+
+- name: "Story:8"
+  description: "Tarea compleja, con múltiples implicaciones técnicas. Tiempo estimado: 2–4 días."
+  color: "2279c9"
+
+- name: "Story:13"
+  description: "Tarea muy compleja, con alto riesgo o esfuerzo transversal. Tiempo estimado: 4–7 días."
+  color: "145ea8"
+
+- name: "Story:21"
+  description: "Tarea de tipo épica o demasiado grande para un solo sprint. Tiempo estimado: +1 semana."
+  color: "0b4a8c"
+
+# === Tipo de Bug (severidad / naturaleza)
+- name: "Bug:leve"
+  description: "Fallo menor, sin impacto en la funcionalidad principal. No bloquea el flujo del usuario."
+  color: "fef2c0"
+
+- name: "Bug:critico"
+  description: "Falla severa que impide el uso normal del sistema o afecta datos sensibles."
+  color: "bf1919"
+
+- name: "Bug:retrabajo"
+  description: "Corrección sobre algo que ya se había dado por entregado. Puede reflejar un fallo en calidad o definición."
+  color: "f9d0c4"
