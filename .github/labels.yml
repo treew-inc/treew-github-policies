@@ -113,4 +113,3 @@
 - name: "Bug:retrabajo"
   description: "Corrección sobre algo que ya se había dado por entregado. Puede reflejar un fallo en calidad o definición."
   color: "f9d0c4"
-  
