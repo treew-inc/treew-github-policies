@@ -21,14 +21,13 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/ia-api-imageaiproductprofile
-            treew-inc/ia-api-chatgptprompt
-            treew-inc/ia-mcp-client
-            treew-inc/ia-mcp-freshservice
-            treew-inc/ia-mcp-github
-            treew-inc/ia-mcp-gitlab
-            treew-inc/ia-api-storeagentai
-            treew-inc/ia-mcp-trello
+            treew-inc/envios23-api-searcher
+            treew-inc/envios23-api-backoffice
+            treew-inc/envios23-api-envios23
+            treew-inc/envios23-web-admin
+            treew-inc/envios23-web-admin2
+            treew-inc/envios23-web-ecommerceold
+            treew-inc/envios23-web-web
           prune: true                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
