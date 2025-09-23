@@ -21,29 +21,8 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/banca-api-coregateway
-            treew-inc/banca-api-auth
-            treew-inc/banca-api-fintreew
-            treew-inc/banca-api-gateway
-            treew-inc/banca-api-gestionsolucitudes
-            treew-inc/banca-api-integrations
-            treew-inc/banca-api-paymentrequests
-            treew-inc/banca-api-rbac
-            treew-inc/banca-api-transfermanager
-            treew-inc/banca-api-usermanagement
-            treew-inc/banca-app-ecotreew
-            treew-inc/banca-app-providerfintreew
-            treew-inc/banca-svc-coremsaccounts
-            treew-inc/banca-svc-coremsclients
-            treew-inc/banca-svc-coremssecurity
-            treew-inc/banca-svc-coremstransactions
-            treew-inc/banca-web-admincore
-            treew-inc/banca-web-adminsuperpay
-            treew-inc/banca-web-fintreew
-            treew-inc/banca-web-gestionsolucitudes
-            treew-inc/banca-web-paylink
-            treew-inc/banca-web-qrproviders
-            treew-inc/banca-web-rbac
-          prune: true                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/calidad-labels-testexistente
+            treew-inc/calidad-labels-testnuevo
+          prune: false                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
