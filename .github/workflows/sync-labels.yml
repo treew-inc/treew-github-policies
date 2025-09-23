@@ -21,9 +21,6 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/supervision-api-frauddetection
-            treew-inc/supervision-api-transactionhub
-            treew-inc/supervision-api-treewnotification
             treew-inc/supervision-web-transactionhub  
           prune: true                 # false No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
