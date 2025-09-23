@@ -111,9 +111,5 @@
   color: "bf1919"
 
 - name: "Bug:retrabajo"
-  description: "Corrección sobre algo que ya se había dado por entregado. Puede reflejar un fallo en calidad o definición."
-  color: "f9d0c4"
-
-- name: "Bug:retrabajo"
-  description: "Corrección sobre algo que ya se había dado por entregado. Puede reflejar un fallo en calidad o definición."
+  description: "Corrección sobre algo que ya se había dado por entregado."
   color: "f9d0c4"
