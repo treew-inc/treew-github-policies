@@ -21,8 +21,38 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/qhcorp-app-qhcorptreew
-            treew-inc/qhcorp-web-qhcorphomes
-          prune: true                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/core-schema-events
+            treew-inc/plataforma-admin-admintreew
+            treew-inc/plataforma-api-callcenter
+            treew-inc/plataforma-api-geoaddress
+            treew-inc/plataforma-api-mediastreew
+            treew-inc/plataforma-api-navhistory
+            treew-inc/plataforma-api-ordereventnotifier
+            treew-inc/plataforma-api-productofferconnector
+            treew-inc/plataforma-api-productvalidator
+            treew-inc/plataforma-api-securegraphql
+            treew-inc/plataforma-api-shoppingcart
+            treew-inc/plataforma-api-standardizedaddress
+            treew-inc/plataforma-api-tiendagateway
+            treew-inc/plataforma-api-tiendagraphql
+            treew-inc/plataforma-api-tiendagraphqldeploy
+            treew-inc/plataforma-api-tiendas
+            treew-inc/plataforma-api-tiendasdeploy
+            treew-inc/plataforma-api-tiendashistory
+            treew-inc/plataforma-api-treewprime
+            treew-inc/plataforma-api-treewsearchengine
+            treew-inc/plataforma-app-distributors
+            treew-inc/plataforma-app-providersm23kotlin
+            treew-inc/plataforma-bot-telegramtreew
+            treew-inc/plataforma-mcp-callcenter
+            treew-inc/plataforma-script-orderscriptconsole
+            treew-inc/plataforma-script-utils
+            treew-inc/plataforma-web-addressadmin
+            treew-inc/plataforma-web-admintiendas
+            treew-inc/plataforma-web-callcenter
+            treew-inc/plataforma-web-platformtreew
+            treew-inc/plataforma-web-siteconfigurator
+            treew-inc/plataforma-web-telegramtreewbotadmin
+          prune: false                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
