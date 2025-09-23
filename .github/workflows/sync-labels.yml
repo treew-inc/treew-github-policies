@@ -21,14 +21,18 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/pim-api-product-classifier
-            treew-inc/pim-api-apibulkimages
-            treew-inc/pim-api-catalogsearchapi
-            treew-inc/pim-api-gtinservice
-            treew-inc/pim-api-productscatalogapi
-            treew-inc/pim-api-productssync
-            treew-inc/pim-api-treewClassifier
-            treew-inc/pim-web-catalogfrontend
+            treew-inc/logistica-app-cd
+            treew-inc/logistica-api-fleetcontrol
+            treew-inc/logistica-app-distributorflutter
+            treew-inc/logistica-svc-packlinkfrontend
+            treew-inc/logistica-svc-packlinkbackend
+            treew-inc/logistica-mcp-fleetcontrol
+            treew-inc/logistica-svc-microcdbackend
+            treew-inc/logistica-svc-microcdfrontend
+            treew-inc/logistica-web-distributors
+            treew-inc/logistica-web-fleetcontrol
+            treew-inc/logistica-web-fleetcontroladmin
+            treew-inc/logistica-app-distributioncenter
           prune: false                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
