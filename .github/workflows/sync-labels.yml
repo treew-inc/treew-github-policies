@@ -21,9 +21,7 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/calidad-repoprueba-test7
-            treew-inc/calidad-repoprueba-test8
-            treew-inc/calidad-repoprueba-test9
-          prune: false                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/calidad-labels-testexistente
+          prune: true                 # false No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
