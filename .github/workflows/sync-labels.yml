@@ -1,0 +1,29 @@
+name: Sync labels (test)
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - ".github/labels.yml"
+
+# (Opcional) Permisos mínimos para este workflow.
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync labels to selected repositories (no prune)
+        uses: micnncim/action-label-syncer@v1
+        with:
+          manifest: .github/labels.yml
+          repository: |
+            treew-inc/calidad-repoprueba-test7
+            treew-inc/calidad-repoprueba-test8
+            treew-inc/calidad-repoprueba-test9
+          prune: false                 # No elimina etiquetas que no estén en labels.yml
+          token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
+        continue-on-error: true         # Si un repo falla, sigue con los demás
