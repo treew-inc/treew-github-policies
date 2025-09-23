@@ -21,7 +21,7 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/calidad-labels-testnuevo
+            treew-inc/supervision-web-transactionhub
             treew-inc/calidad-labels-testexistente
           prune: true                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
