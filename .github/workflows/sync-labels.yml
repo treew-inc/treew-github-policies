@@ -21,8 +21,8 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/sir-api-claims
-            treew-inc/calidad-labels-testexistente
-          prune: false                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/sir-admin-claim
+            treew-inc/sir-mcp-claims
+          prune: true                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
