@@ -21,18 +21,9 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/logistica-app-cd
-            treew-inc/logistica-api-fleetcontrol
-            treew-inc/logistica-app-distributorflutter
-            treew-inc/logistica-svc-packlinkfrontend
-            treew-inc/logistica-svc-packlinkbackend
-            treew-inc/logistica-mcp-fleetcontrol
-            treew-inc/logistica-svc-microcdbackend
-            treew-inc/logistica-svc-microcdfrontend
-            treew-inc/logistica-web-distributors
-            treew-inc/logistica-web-fleetcontrol
-            treew-inc/logistica-web-fleetcontroladmin
-            treew-inc/logistica-app-distributioncenter
-          prune: false                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/laguna-script-dashboardingestor
+            treew-inc/laguna-api-dashboard
+            treew-inc/laguna-web-dashboard
+          prune: true                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
