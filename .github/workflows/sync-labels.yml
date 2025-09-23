@@ -21,13 +21,12 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/envios23-api-searcher
-            treew-inc/envios23-api-backoffice
-            treew-inc/envios23-api-envios23
-            treew-inc/envios23-web-admin
-            treew-inc/envios23-web-admin2
-            treew-inc/envios23-web-ecommerceold
-            treew-inc/envios23-web-web
-          prune: true                 # No elimina etiquetas que no estén en labels.yml
+            treew-inc/core-api-smsgateway
+            treew-inc/core-api-tiendasopenidconnect
+            treew-inc/core-api-twofactorauth
+            treew-inc/core-api-openidconnect
+            treew-inc/core-api-treewsiteconfigurator
+            treew-inc/core-api-mail2webapi
+          prune: false                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
