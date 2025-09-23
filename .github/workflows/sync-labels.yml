@@ -21,28 +21,8 @@ jobs:
         with:
           manifest: .github/labels.yml
           repository: |
-            treew-inc/tkc-app-pickerpacker2
-            treew-inc/tkc-app-pickpack
-            treew-inc/tkc-app-tkcapp
-            treew-inc/tkc-script-dispatchconsumer
-            treew-inc/tkc-script-elasticcollector
-            treew-inc/tkc-script-reservedproducts
-            treew-inc/tkc-script-tkcscripts
-            treew-inc/tkc-svc-aichat
-            treew-inc/tkc-svc-aitemplates
-            treew-inc/tkc-svc-enviosservice
-            treew-inc/tkc-svc-mcpreportes
-            treew-inc/tkc-svc-microsynchro
-            treew-inc/tkc-svc-notificaciones
-            treew-inc/tkc-svc-pdfgenerator
-            treew-inc/tkc-svc-shippinglabelextractor
-            treew-inc/tkc-svc-shippinglabelvalidator
-            treew-inc/tkc-svc-websocket
-            treew-inc/tkc-template-almendarestravels
-            treew-inc/tkc-template-tkctemplate
-            treew-inc/tkc-web-eclexweb
-            treew-inc/tkc-web-tkcweb
-            treew-inc/tkc-web-treewcarbon
+            treew-inc/calidad-labels-testnuevo
+            treew-inc/tkc-svc-micronovedades
           prune: false                 # No elimina etiquetas que no estén en labels.yml
           token: ${{ secrets.PERSONAL_TOKEN }}  # PAT con Write en Issues/metadata
         continue-on-error: true         # Si un repo falla, sigue con los demás
