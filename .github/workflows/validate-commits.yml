@@ -25,7 +25,7 @@ jobs:
 
       - name: Instalar dependencias de commitlint
         run: |
-          npm npm install --save-dev @commitlint/cli@18 @commitlint/config-conventional@18
+          npm install --save-dev @commitlint/cli@18 @commitlint/config-conventional@18
       - name: Crear archivo de configuración temporal
         run: |
           echo "module.exports = {" > commitlint.config.cjs
