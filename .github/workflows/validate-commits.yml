@@ -52,15 +52,13 @@ jobs:
           errores=0
           for commit in $commits; do
             mensaje=$(git show -s --format=%B $commit)
+            mensaje_display=$(echo "$mensaje" | tr '\n' ' ' | sed 's/  */ /g')
             echo "⧗ Validando commit: $commit"
-            echo "📝 Mensaje del commit: \"$mensaje\""
-
-            # Ignorar merge commits antes de llegar a commitlint
+            echo "📝 Mensaje del commit: \"$mensaje_display\""
             if echo "$mensaje" | grep -qE "^Merge pull request|^Merge branch"; then
-              echo "⏭️ Merge commit ignorado: $commit"
+              echo "⏭️ Commit automático ignorado"
               continue
             fi
-
             if echo "$mensaje" | "$COMMITLINT" --config "$CONFIG"; then
               echo "✅ Commit válido"
             else
